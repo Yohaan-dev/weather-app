@@ -2,11 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 
+const API_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
 const App = () => {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=5570330c315553043b910656389a9afe`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${API_KEY}`
 
   const searchLocation = (e) => {
     if (e.key === 'Enter') {
@@ -19,7 +20,7 @@ const App = () => {
   }
 
   return (
-    <div className='container mx-auto md:max-w-6xl px-4'>
+    <div className='container mx-auto px-4'>
       <div className='flex justify-center my-10'>
       <input
         type="text"
@@ -37,8 +38,8 @@ const App = () => {
         </div>
         {data.weather ? <p className='font-serif text-lg text-white'>{data.weather[0].main}</p> : null}
       </div>
-      <div className='mt-32'>
-        {data.name != undefined && <div className='max-w-sm mx-auto px-4 py-2 rounded-md bg-gray-50/50 shadow-md p-4'>
+      <div className='mt-56'>
+        {data.name != undefined && <div className='max-w-xl mx-auto px-4 py-2 rounded-md bg-gray-50/50 shadow-md p-4'>
           <div className='flex flex-row items-center justify-between gap-4'>
             <div className='flex flex-col items-center'>
               {data.main ? <p className='font-bold text-gray-800'>{data.main.feels_like.toFixed()}&deg;F</p> : null}
